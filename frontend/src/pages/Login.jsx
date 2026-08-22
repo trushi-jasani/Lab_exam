@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+
 function Login() {
 
     const [identifier, setIdentifier] = useState("");
@@ -35,7 +36,7 @@ function Login() {
             );
 
             if (!response.ok) {
-                throw new Error("Invalid credentials");
+                throw new Error("Invalid enrollment number/email or password.");
             }
 
             const data = await response.json();
@@ -76,57 +77,91 @@ function Login() {
 
             <div className="login-card">
 
+                {/* Header */}
+
                 <div className="login-header">
 
-                    <div className="logo-box">
-                        LE
+                    <div className="university-logo">
+                        DDU
                     </div>
 
-                    <h1>Lab Exam System</h1>
+                    <h1>Lab Examination Portal</h1>
 
-                    <p>Sign in to continue</p>
+                    <p>
+                        Deen Dayal Upadhyaya University
+                    </p>
 
                 </div>
 
+
+                {/* Login Form */}
+
                 <form onSubmit={handleLogin}>
 
-                    <label>
-                        Enrollment Number / Email
-                    </label>
+                    <div className="form-group">
 
-                    <input
-                        type="text"
-                        placeholder="Enrollment Number / Email"
-                        value={identifier}
-                        onChange={(e) =>
-                            setIdentifier(e.target.value)
-                        }
-                    />
+                        <label>
+                            Enrollment Number / Email
+                        </label>
 
-                    <label>
-                        Password
-                    </label>
+                        <input
+                            type="text"
+                            placeholder="Enter enrollment number or email"
+                            value={identifier}
+                            onChange={(e) =>
+                                setIdentifier(e.target.value)
+                            }
+                            required
+                        />
 
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) =>
-                            setPassword(e.target.value)
-                        }
-                    />
+                    </div>
 
-                    <button type="submit">
-                        Login
+
+                    <div className="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            placeholder="Enter password"
+                            value={password}
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+                            required
+                        />
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        className="login-button"
+                    >
+                        Sign In
                     </button>
 
                 </form>
 
+
+                {/* Error */}
+
                 {error && (
-                    <p className="login-error">
+                    <div className="login-error">
                         {error}
-                    </p>
+                    </div>
                 )}
+
+
+                {/* Footer */}
+
+                <div className="login-footer">
+                    <p>
+                        Lab Examination Portal
+                    </p>
+                </div>
 
             </div>
 
